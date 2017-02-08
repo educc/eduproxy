@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">	
+	<title>eduproxy</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/app.css">
+</head>
+<body ng-app="eduproxyapp">
+	<div ng-controller="MainController as mainCtrl">
+		<h1 class="text-center">BSIO REQUESTS AND RESPONSES</h1> 
+		<div class="row-centered">
+			<form ng-submit="mainCtrl.changeServer()">
+				<input  type="text" ng-model="mainCtrl.proxy"
+					placeholder="pxessd01:9080"
+					pattern="\w+:\d+"  
+					required="">
+				<button type="submit" >Update Server</button>
+			</form>  
+		</div> 
+		<div class="center-in-page" ng-show="mainCtrl.data.length==0">
+			<h1>Sin registros</h1>
+		</div>
+		<table class="table table-hover" ng-hide="mainCtrl.data.length==0">
+			<thead>
+				<tr>
+					<th width="50">#</th>
+					<th width="150">Date</th>
+					<th >Action</th>
+					<th width="150">Request</th>
+					<th width="150">Response</th>
+				</tr>
+			</thead>
+			<tbody> 
+				<tr ng-repeat="item in mainCtrl.data track by $index">
+					<td>{{ $index+1 }}</td>
+					<td>{{item.date | date:'dd/MM/yyyy HH:mm'}}</td>
+					<td>{{item.action}}</td>
+					<td class="text-center"><a target="_blank" href='{{item.rq}}'>ver</a></td>
+					<td class="text-center"><a target="_blank" href='{{item.rs}}' ng-hide="item.rs==''">ver</a></td>
+				</tr>
+			</tbody>
+		</table> 
+	</div>
+
+	<script type="text/javascript" src="/static/js/angular.min.js"></script>
+	<script type="text/javascript" src="/static/js/app.js"></script>
+</body>
+</html>
