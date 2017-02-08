@@ -1,7 +1,7 @@
 # dirs about the APP
 data.db
-./static/request/*
-./static/response/*
+static/request
+static/response
 
 # Logs
 logs
