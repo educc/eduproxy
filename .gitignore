@@ -3,6 +3,7 @@
 npm-debug.log
 data_empty.db
 data.db
+.env
 
 #directories
 node_modules/*
