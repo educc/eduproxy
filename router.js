@@ -19,6 +19,10 @@ var MODULE = {};
 				break;
 			}
 
+			if( request.method == 'GET' && request.url.startsWith('/socket.io') ){
+				break;
+			}
+
 			if( request.method == item.method ){
 				if(request.url.startsWith(item.path))	{
 					item.fn(request, response)

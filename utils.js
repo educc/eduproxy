@@ -12,9 +12,10 @@ var UTILS = {};
 		}
 		
 		fs.readdir(abspath, (err,files) =>{
-			var re = /\d+-\w+-\d+\..*/g;
+			var re = /\d+-\w+-\d+\.\w\w\w?$/i;
 			var i = 0; 
-			files = files.reverse();
+			files.sort();
+			files.reverse();
 			filterFiles = files.filter(filename => {
 				return re.test(filename) && i++ < utils.MAX_LIST_FILES;
 			})
@@ -40,21 +41,11 @@ var UTILS = {};
 		filename += utils._getNameFromTpxml(content)
 		filename += "-"
 		filename += utils.rand().toString()
+		filename += ".xml"
 		return filename
 	}
-	utils.getExtension = function(contentType = ""){
-		var ext = ".txt"
-		if( contentType.indexOf('html') != -1){
-			ext = ".html"
-		}else if( contentType.indexOf('xml') != -1){
-			ext = ".html"
-		}else if( contentType.indexOf('json') != -1){
-			ext = ".json"
-		}
-		return ext
-	}
 	utils._getNameFromTpxml = function(content){  
-		var actionName = "Unknow";
+		var actionName = "IFX";
 	    var idxAction = content.indexOf("<action")
 	 
 	    if( idxAction > -1){
@@ -75,11 +66,8 @@ var UTILS = {};
 	                
 	            actionName = thename
 	       	}
-	    }else {
-	    	if( content.indexOf("<IFX") > -1 ){
-	    		action = "IFX"
-	    	}
 	    }
+	        
 	    return actionName
 	}
 	utils.rand = function rand(){

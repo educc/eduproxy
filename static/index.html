@@ -26,24 +26,27 @@
 				<tr>
 					<th width="50">#</th>
 					<th width="150">Date</th>
-					<th >Action</th>
+					<th >Transaction</th>
 					<th width="150">Request</th>
 					<th width="150">Response</th>
+					<th width="100">Action</th>
 				</tr>
 			</thead>
 			<tbody> 
 				<tr ng-repeat="item in mainCtrl.data track by $index">
-					<td>{{ $index+1 }}</td>
+					<td class="text-center">{{ $index+1 }}</td>
 					<td>{{item.date | date:'dd/MM/yyyy HH:mm'}}</td>
 					<td>{{item.action}}</td>
 					<td class="text-center"><a target="_blank" href='{{item.rq}}'>ver</a></td>
 					<td class="text-center"><a target="_blank" href='{{item.rs}}' ng-hide="item.rs==''">ver</a></td>
+					<td class="text-center"><button>Re-enviar</button></td>
 				</tr>
 			</tbody>
 		</table> 
 	</div>
 
 	<script type="text/javascript" src="/static/js/angular.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="/static/js/app.js"></script>
 </body>
 </html>
