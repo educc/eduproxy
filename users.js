@@ -2,7 +2,7 @@ var sqlite3 = require('sqlite3').verbose();
 
 var MYDB = {};
 (function(THIS){
-	THIS.db = new sqlite3.Database('data.db');
+	THIS.db = new sqlite3.Database('data.db.sqlite');
 
 	THIS.userByIp = function(ip, callback){
 		ip = THIS._scapeIp(ip)

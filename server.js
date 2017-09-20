@@ -100,7 +100,7 @@ router.post('/proxy/config',(req,res)=>{
 	router.onBody(req,res,(body)=>{
 		var obj = JSON.parse(body)
 		obj.$ip = utils.reqToIp(req)
-		users.saveProxyToUser(obj, result => { 
+		users.saveProxyToUser(obj, result => {
 			obj = { success: result===null? true:false } 
 			res.setHeader('Content-Type', 'application/json');
 			res.end(JSON.stringify(obj));
