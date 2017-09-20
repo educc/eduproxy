@@ -20,11 +20,11 @@ var MYDB = {};
 			obj.$ip = THIS._scapeIp(obj.$ip)
 
 			if( user === undefined ){ 
-				var sql = "insert into users (ip,host,port) values ($ip,$host,$port)"; 
+				var sql = "insert into users (ip,host,port, protocol) values ($ip,$host,$port, $protocol)"; 
 				THIS.db.run(sql, obj, callback);
 			}else{
-				newobj = {$id: user.id, $host:obj.$host, $port: obj.$port};
-				var sql = "update users set host=$host, port=$port where id=$id";
+				newobj = {$id: user.id, $host:obj.$host, $port: obj.$port, $protocol:obj.$protocol};
+				var sql = "update users set host=$host, port=$port, protocol=$protocol where id=$id";
 				THIS.db.run(sql, newobj, callback);
 			}
 		})

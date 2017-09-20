@@ -1,6 +1,10 @@
 
 @lineColor: rgb(150,150,150);
 
+* {
+	box-sizing: border-box;
+}
+
 .row-centered,.text-center {
 	text-align: center;
 }
@@ -75,4 +79,57 @@ h1 {
 		text-align: center;
 		color: rgb(170, 170, 170);
 	}
+}
+
+.app-actions {
+	display: flex;
+	justify-content: center;
+
+	.app-actions-right {
+		float:right;
+	}
+
+}
+
+.dialog-container {
+	position:absolute;
+	top:0px;
+	width: 600px;
+	height: 600px;
+	left: 50%;
+	margin-left: -300px;
+	margin-top: 50px;
+	box-sizing: border-box;
+
+	background: rgb(180,180,180);
+	border: 1px solid gray;
+	border-radius: 5px;
+
+	.dialog-wrapper {
+		display:flex;
+		flex-direction: column;
+		padding: 20px;
+		height:100%;
+
+		h3 {
+			font-size: 15px;
+		}
+
+		.dialog-content {
+			flex-grow: 2;
+			textarea {
+				width:100%;
+				height: 100%;
+				resize: none;
+				overflow-x: scroll;
+				overflow-y: scroll;
+			}
+		}
+
+		.dialog-actions {
+			padding: 15px 0 0 0;
+			text-align: right;
+		}
+	}
+
 }

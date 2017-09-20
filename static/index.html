@@ -9,14 +9,29 @@
 <body ng-app="eduproxyapp">
 	<div ng-controller="MainController as mainCtrl">
 		<h1 class="text-center">BSIO REQUESTS AND RESPONSES</h1> 
-		<div class="row-centered">
+		<div class="app-actions">
 			<form ng-submit="mainCtrl.changeServer()">
+				<select ng-model="mainCtrl.protocol">
+					<option>http</option>
+					<option>https</option>
+				</select>
 				<input  type="text" ng-model="mainCtrl.proxy"
 					placeholder="pxessd01:9080"
-					pattern="\w+:\d+"  
+					pattern="(\w+:\d+$|\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d+$)"  
 					required="">
 				<button type="submit" >Update Server</button>
-			</form>  
+			</form>
+			<div class="app-actions-right">
+
+				<button ng-show="mainCtrl.hasDummy" ng-click="mainCtrl.removeDummy()">Remove Dummy Content</button>
+				<button 
+					ng-hide="mainCtrl.hasDummy" 
+					onclick="document.getElementById('selectedFile').click();">Set Dummy Content</button>
+				<input type="file" id="selectedFile" style="display: none;" fileread="mainCtrl.saveDummy" />
+
+				<button 
+					ng-click="mainCtrl.deleteAll()" >Borrar Todo</button>
+			 </div>
 		</div> 
 		<div class="center-in-page" ng-show="mainCtrl.data.length==0">
 			<h1>Sin registros</h1>
@@ -39,10 +54,23 @@
 					<td>{{item.action}}</td>
 					<td class="text-center"><a target="_blank" href='{{item.rq}}'>ver</a></td>
 					<td class="text-center"><a target="_blank" href='{{item.rs}}' ng-hide="item.rs==''">ver</a></td>
-					<td class="text-center"><button>Re-enviar</button></td>
+					<td class="text-center"><button ng-click="mainCtrl.openDialog(item.rq)">Re-enviar</button></td>
 				</tr>
 			</tbody>
-		</table> 
+		</table>
+
+		<div class="dialog-container" ng-show="mainCtrl.showDialog">
+			<div class="dialog-wrapper"> 
+				<h3>Re-Enviar Trama</h3>
+				<div class="dialog-content">
+					<textarea ng-model="mainCtrl.tramaSend"></textarea>
+				</div>
+				<div class="dialog-actions">
+					<button ng-click="mainCtrl.resend()">Enviar</button>
+					<button ng-click="mainCtrl.closeDialog()">Cancelar</button>
+				</div>
+			</div>
+		</div> 
 	</div>
 
 	<script type="text/javascript" src="/static/js/angular.min.js"></script>
